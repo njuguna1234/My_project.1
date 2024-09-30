@@ -1,0 +1,153 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #3d3838;
+    color: #333;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background-color: #f079ea;
+    color: rgb(19, 16, 16);
+    padding: 10px 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.2em;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #110c0c;
+}
+
+/* Section: About */
+section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(226, 119, 203, 0.705);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+section h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+section p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* Gallery */
+.gallery {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.gallery-item {
+    width: 30%;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.gallery-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.gallery-item h3 {
+    margin-top: 10px;
+    color: #333;
+}
+
+.gallery-item p {
+    font-size: 1em;
+    color: #666;
+}
+
+/* Footer (optional) */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #da93c8;
+    color: white;
+}
+
+footer p {
+    margin: 0;
+    font-size: 1em;
+}
+
+/* Buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gallery-item {
+        width: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-item {
+        width: 100%;
+    }
+}

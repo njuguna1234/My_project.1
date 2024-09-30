@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Portfolio</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('portfolio') }}">Portfolio</a></li>
+                <li><a href="{{ url_for('booking') }}">Booking</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>My Work</h2>
+
+        <!-- Portfolio gallery -->
+        <div class="gallery">
+            <!-- Loop through uploaded files and display them -->
+            {% for file in uploaded_files %}
+            <div class="gallery-item">
+                {% if file.endswith('.jpg') or file.endswith('.png') or file.endswith('.jpeg') %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ file) }}" alt="Uploaded Image">
+                {% elif file.endswith('.mp4') or file.endswith('.webm') %}
+                    <video controls>
+                        <source src="{{ url_for('static', filename='uploads/' ~ file) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% else %}
+                    <a href="{{ url_for('static', filename='uploads/' ~ file) }}" target="_blank">View {{ file }}</a>
+                {% endif %}
+
+                <!-- Show delete button if user is logged in -->
+                {% if current_user.is_authenticated %}
+                    <form action="{{ url_for('delete_file') }}" method="POST" style="display:inline;">
+                        <input type="hidden" name="filename" value="{{ file }}">
+                        <button type="submit" class="delete-button">Delete</button>
+                    </form>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+</html>

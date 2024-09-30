@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Serenity Therapy Space</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Serenity Therapy Space</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('portfolio') }}">Portfolio</a></li>
+                <li><a href="{{ url_for('booking') }}">Booking</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('upload_content') }}">Upload Content</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>About Me</h2>
+        <p>Write your content here about who you are, your services, and your work.</p>
+    </section>
+</body>
+</html>
