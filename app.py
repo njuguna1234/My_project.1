@@ -1,8 +1,8 @@
-import os
-from flask import Flask, render_template, redirect, url_for, flash, request, send_from_directory
+from flask import Flask, render_template_string, redirect, url_for, flash, request
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.utils import secure_filename
 from werkzeug.security import check_password_hash, generate_password_hash
+import os
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -33,19 +33,23 @@ def load_user(username):
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# Specify custom path for your HTML files
 @app.route('/')
 def home():
-    return render_template('index.html')
+    with open('index.html') as f:
+        return render_template_string(f.read())
 
 @app.route('/portfolio')
 def portfolio():
     # List all files in the upload folder
     uploaded_files = os.listdir(app.config['UPLOAD_FOLDER'])
-    return render_template('portfolio.html', uploaded_files=uploaded_files)
+    with open('portfolio.html') as f:
+        return render_template_string(f.read(), uploaded_files=uploaded_files)
 
 @app.route('/booking')
 def booking():
-    return render_template('booking.html')
+    with open('booking.html') as f:
+        return render_template_string(f.read())
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -60,7 +64,8 @@ def login():
         else:
             flash('Invalid username or password')
     
-    return render_template('login.html')
+    with open('login.html') as f:
+        return render_template_string(f.read())
 
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
@@ -79,7 +84,8 @@ def upload_content():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             flash('File successfully uploaded')
             return redirect(url_for('portfolio'))  # Redirect to the portfolio page to view the uploaded work
-    return render_template('upload.html')
+    with open('upload.html') as f:
+        return render_template_string(f.read())
 
 @app.route('/delete_file', methods=['POST'])
 @login_required
